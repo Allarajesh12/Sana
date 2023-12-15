@@ -17,9 +17,12 @@ http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule
 			<logger level="INFO" doc:name="4" doc:id="dddc1914-0d7c-4994-b6cf-1e2a08fb4e0a" message="4"/>
 			<logger level="INFO" doc:name="5" doc:id="846b8182-d767-48a3-95c9-658e57f46ea2" message="5"/>
 			<logger level="INFO" doc:name="6" doc:id="c0c8beec-f324-43ed-995d-59a055f10750" message="6"/>
-			<logger level="INFO" doc:name="7" doc:id="8c44b3b6-d1a3-4fef-922e-5eeb3f6e3f74" message="7"/>
-			<logger level="INFO" doc:name="8" doc:id="ae22c13c-99ad-48e9-b07b-07841be5c31e" message="8" />
+			<logger level="INFO" doc:name="7" doc:id="ae22c13c-99ad-48e9-b07b-07841be5c31e" message="7" />
+			<flow-ref doc:name="async sub" doc:id="9a854e5c-64f3-4793-8b5e-930a76697bd7" name="asyncSub_Flow"/>
 		</async>
 		<logger level="INFO" doc:name="9" doc:id="fb7f095b-3058-4ac0-b98c-f88befba3fa4" message="9"/>
 	</flow>
+	<sub-flow name="asyncSub_Flow" doc:id="173a14ac-e1e8-4a8a-86aa-d0937959a420" >
+		<logger level="INFO" doc:name="sub flow" doc:id="8c44b3b6-d1a3-4fef-922e-5eeb3f6e3f74" message="sub flow " />
+	</sub-flow>
 </mule>
