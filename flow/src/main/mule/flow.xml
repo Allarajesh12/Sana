@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1ce56f90-d4b3-45ad-82f0-5d4f7c7493bd" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<flow name="flowFlow" doc:id="2d67b352-7b03-496e-808c-fe18ddcbeb88" >
+		<http:listener doc:name="FLow" doc:id="801694bd-b29e-4581-be85-0d2f2b56d986" config-ref="HTTP_Listener_config" path="Display data Succesfully"/>
+		<logger level="INFO" doc:name="MAIN_FLOW" doc:id="0f8be4a8-2051-49fa-8a33-64ed860a6147" message="CALLING MAIN FLOW"/>
+		<flow-ref doc:name="Flow Reference" doc:id="bae9f99f-c5fa-4552-8e86-e39c6b02150c" name="flowSub_Flow"/>
+		<flow-ref doc:name="Flow Reference" doc:id="75e089af-b537-45af-9fb2-d665157ba29d" name="Private_flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="cff6aeac-5f64-4002-ab34-9709560648dd" message="Created by Alla Rajesh"/>
+	</flow>
+	<sub-flow name="flowSub_Flow" doc:id="827003f9-f5f6-4304-9dda-0a12b908ea3c" >
+		<logger level="INFO" doc:name="SUB_FLOW" doc:id="e83f5cc2-5ade-4e0f-bd47-c47f1eddbf30" message="Calling Sub Flow"/>
+	</sub-flow>
+	<flow name="Private_flow" doc:id="13e82b2d-3829-4e54-853a-725f6dc5db79" >
+		<logger level="INFO" doc:name="Private_flow" doc:id="f53f0b93-0aec-4ae2-9cf4-ce4bc0d2c2f9" message="this is private flow"/>
+	</flow>
+</mule>
