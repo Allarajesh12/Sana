@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="error_handlingFlow" doc:id="e4206700-ef31-481a-8397-d88e855b3540" >
+		<http:listener doc:name="Listener" doc:id="65c6effb-02c5-4494-be17-12d6ba74db0f" config-ref="HTTP_Listener_config" path="error"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1c5a2b20-3c38-4ae4-b637-ba2bf7890484" message="Handling_Error"/>
+		<set-variable value="#[attributes.queryParams.amount]" doc:name="Set Variable" doc:id="fd5a1a88-bb76-4113-9014-78fe81c3b3b4" variableName="amount"/>
+		<choice doc:name="Choice" doc:id="56468980-9e0a-4950-b6b0-e82ce2886970" >
+			<when expression="#[vars.amount &lt;=500]">
+				<ee:transform doc:name="Transform Message" doc:id="78db2551-223a-404d-b859-661de3def480" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "Amount sufficent"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise>
+				<raise-error doc:name="Raise error" doc:id="5f0c03a2-18a8-4cd3-9a68-97b2dd414600" type='"CUSTOM:CUSTOM_ERROR' description="insufficent funds"/>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="error_handlingFlow1" doc:id="8e308aee-3d1d-43e6-95a3-f6ca881f2b65" >
+		<http:listener doc:name="Listener" doc:id="22236c35-de5a-40f9-886f-9cdb15263c96" config-ref="HTTP_Listener_config" path="/errorptop"/>
+		<logger level="INFO" doc:name="Logger" doc:id="96f0d8f2-06bc-407e-91d0-5caa6febf69b" message="Handling_Error"/>
+		<set-variable value="attributes.queryParams.amount" doc:name="Set Variable" doc:id="8a2e1816-e0c6-46fb-bd62-ac726723105d" variableName="amount"/>
+		<choice doc:name="Choice" doc:id="84dccb33-3f47-477e-8298-931961859772" >
+			<when expression="#[vars.amount &lt;=500]">
+				<ee:transform doc:name="Transform Message" doc:id="4f82391c-68eb-4772-abcc-0d1971b20bb4" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	"message" : "Amount sufficent"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+		</choice>
+	</flow>
+</mule>
