@@ -20,6 +20,7 @@ http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule
 			<logger level="INFO" doc:name="7" doc:id="ae22c13c-99ad-48e9-b07b-07841be5c31e" message="7" />
 			<flow-ref doc:name="async sub" doc:id="9a854e5c-64f3-4793-8b5e-930a76697bd7" name="asyncSub_Flow"/>
                         <logger level="INFO" doc:name="7" doc:id="ae22c13c-99ad-48e9-b07b-07841be5c31e" message="10" />
+			<logger level="INFO" doc:name="7" doc:id="ae22c13c-99ad-48e9-b07b-07841be5c31e" message="10" />
 		</async>
 		<logger level="INFO" doc:name="9" doc:id="fb7f095b-3058-4ac0-b98c-f88befba3fa4" message="9"/>
 	</flow>
